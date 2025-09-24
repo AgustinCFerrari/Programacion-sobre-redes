@@ -20,16 +20,17 @@ source .venv/bin/activate
 
 pip install flask werkzeug
 
+```
+
 ## 2) Comandos usados en las terminales
 
 ```bash
----------------------------------
-Comando en terminal Servidor
+
+#Comando en terminal Servidor
 
 python servidor.py
 
-----------------------------------
-Comandos en terminal del cliente
+# Comandos en terminal del cliente
 
 # Registro
 curl -s -X POST http://127.0.0.1:5000/registro \
@@ -51,5 +52,6 @@ curl -i http://127.0.0.1:5000/logout -b cookiejar.txt -c cookiejar.txt
 # Chequeo de logout intentando acceder a /tareas 
 curl -i http://127.0.0.1:5000/tareas -b cookiejar.txt
 
+```
 
 

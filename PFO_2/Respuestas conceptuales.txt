@@ -1,0 +1,15 @@
+Respuestas conceptuales
+
+A) ¿Por qué hashear contraseñas?
+
+Por seguridad, dado que si una persona accede a la base de datos, una contraseña en texto plano expone directamente la cuenta del usuario y potencialmente otras cuentas donde se use la misma clave.
+El hasheo de contraseñas es una buena práctica, ya que se guarda solo un hash irreversible. Al autenticar, se hashea lo que ingresa la persona y se compara con el hash guardado.
+Tambien se mitigan ataques, haciendo más costoso el crackeo por fuerza bruta y rainbow tables cuando se usan funciones robustas (p. ej., PBKDF2, bcrypt, argon2). `werkzeug.security` usa PBKDF2 por defecto.
+
+B) Ventajas de usar SQLite en este proyecto
+
+No requiere instalar un servidor de base de datos. Es un archivo `app.db`.
+Es portable, ya que es sencillo de mover/copiar con el repositorio.
+Es muy práctico para prototipos, demos y apps de bajo tráfico.
+No necesita configuración, viene incluido con Python estándar.
+

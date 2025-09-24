@@ -20,6 +20,9 @@ source .venv/bin/activate
 
 pip install flask werkzeug
 
+## 2) Comandos usados en las terminales
+
+```bash
 ---------------------------------
 Comando en terminal Servidor
 

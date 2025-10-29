@@ -1,0 +1,37 @@
++----------------------+
+|     Cliente Web      |
+|  (Petición tarea)    |
++----------+-----------+
+           |
+           v
++----------------------+
+|  Balanceador NGINX   |
+| (divide carga entre  |
+|  los workers activos)|
++----------+-----------+
+           |
+           v
++----------------------+
+|  Servidor Principal  |
+| (socket TCP - Python)|
+|  - ThreadPool        |
+|  - Envío a RabbitMQ  |
++----------+-----------+
+           |
+           v
++----------------------+
+|      RabbitMQ        |
+| (cola de mensajes)   |
++----------+-----------+
+           |
+           v
++----------------------+
+|  Workers consumidores|
+|  (multihilo Python)  |
++----------+-----------+
+           |
+           v
++----------------------+
+| PostgreSQL / S3      |
+| (resultado persistente)
++----------------------+

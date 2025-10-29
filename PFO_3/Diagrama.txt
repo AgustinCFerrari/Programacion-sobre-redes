@@ -32,6 +32,6 @@
            |
            v
 +----------------------+
-| PostgreSQL / S3      |
-| (resultado persistente)
+| SQLite3 (resultado   |
+| persistente)         |
 +----------------------+

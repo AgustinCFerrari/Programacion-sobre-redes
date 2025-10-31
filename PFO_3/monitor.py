@@ -14,7 +14,7 @@ while True:
     cur = conn.cursor()
     cur.execute('SELECT * FROM resultados')
     rows = cur.fetchall()
-    print("\033c")  # Limpiar pantalla en Linux/Mac/CMD
+    print("\033c")  # Limpiar pantalla 
     print("Tareas guardadas:")
     for row in rows:
         print(row)

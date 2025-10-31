@@ -1,37 +1,41 @@
-+----------------------+
-|     Cliente Web      |
-|  (Petición tarea)    |
-+----------+-----------+
-           |
-           v
-+----------------------+
-|  Balanceador NGINX   |
-| (divide carga entre  |
-|  los workers activos)|
-+----------+-----------+
-           |
-           v
-+----------------------+
-|  Servidor Principal  |
-| (socket TCP - Python)|
-|  - ThreadPool        |
-|  - Envío a RabbitMQ  |
-+----------+-----------+
-           |
-           v
-+----------------------+
-|      RabbitMQ        |
-| (cola de mensajes)   |
-+----------+-----------+
-           |
-           v
-+----------------------+
-|  Workers consumidores|
-|  (multihilo Python)  |
-+----------+-----------+
-           |
-           v
-+----------------------+
-| SQLite3 (resultado   |
-| persistente)         |
-+----------------------+
++------------------------------------------------+
+|                  CLIENTE (client.py)           |
+|  Envía tareas mediante socket TCP              |
++------------------------------------------------+
+                        |
+                        v
++------------------------------------------------+
+|          BALANCEADOR (nginx.conf)              |
+| Distribuye las conexiones TCP a varios         |
+| servidores principales                         |
++------------------------------------------------+
+                        |
+                        v
++------------------------------------------------+
+|       SERVIDOR PRINCIPAL (server.py)           |
+| - Recibe tareas por socket TCP                 |
+| - Publica mensajes en RabbitMQ ('tasks')       |
+| - Threading para múltiples clientes            |
++------------------------------------------------+
+                        |
+                        v
++------------------------------------------------+
+|                RABBITMQ (Broker)               |
+|  Cola de mensajes: canal de comunicación       |
+|  entre el servidor y los workers               |
++------------------------------------------------+
+                        |
+                        v
++------------------------------------------------+
+|               WORKERS (worker.py)              |
+| - Multihilo: procesa tareas en paralelo        |
+| - Guarda resultados en SQLite3 (resultados.db) |
++------------------------------------------------+
+                        |
+                        v
++------------------------------------------------+
+|       MONITOR DE TAREAS (monitor.py)           |
+| - Consulta SQLite3 en tiempo real              |
+| - Muestra las tareas procesadas                |
++------------------------------------------------+
+
